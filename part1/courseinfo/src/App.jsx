@@ -1,35 +1,49 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+const App = () => {
+	const course = "Half Stack application development";
+	const parts = {
+		part1: "Fundamentals of React",
+		part2: "Using props to pass data",
+		part3: "State of a component",
+	};
+	const exercises = { exercises1: 10, exercises2: 7, exercises3: 14 };
 
-function App() {
-  const [count, setCount] = useState(0)
+	return (
+		<div>
+			<Header course={course} />
 
-  return (
-    <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
-}
+			<Content parts={parts} exercises={exercises} />
+			<Total exercises={exercises} />
+		</div>
+	);
+};
+const Header = (course) => {
+	return <h1>{course.course}</h1>;
+};
 
-export default App
+const Content = ({ parts, exercises }) => {
+	return (
+		<>
+			<Part parts={parts.part1} exercises={exercises.exercises1} />
+			<Part parts={parts.part2} exercises={exercises.exercises2} />
+			<Part parts={parts.part3} exercises={exercises.exercises3} />
+		</>
+	);
+};
+const Part = ({ parts, exercises }) => {
+	return (
+		<div>
+			{" "}
+			{parts} {exercises}
+		</div>
+	);
+};
+
+const Total = ({ exercises }) => {
+	return (
+		<p>
+			Number of exercises{" "}
+			{exercises.exercises1 + exercises.exercises2 + exercises.exercises3}
+		</p>
+	);
+};
+export default App;
